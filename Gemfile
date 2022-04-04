@@ -28,6 +28,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Secure Env variables
 gem 'figaro'
 
+# Web Scrapping tools
+gem 'kimurai'
+
 # API
 gem 'active_model_serializers', '~> 0.10.0'
 
