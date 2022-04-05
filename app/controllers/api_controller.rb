@@ -7,6 +7,6 @@ class ApiController < ApplicationController
   end
 
   def scrape
-    render json: { hey: 'hi' }
+    NetflixSpiderService.crawl!
   end
 end
