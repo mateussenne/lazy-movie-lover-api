@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   scope :api do
     root to: 'api#index'
+
+    get 'refresh', to: 'api#scrape'
   end
 end

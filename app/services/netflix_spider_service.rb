@@ -4,13 +4,13 @@ require 'kimurai'
 
 class NetflixSpiderService < Kimurai::Base
   @name = 'neflix_spider_service'
-  @strart_urls = 'https://www.netflix.com/br/browse/genre/5343'
+  @start_urls = 'https://www.netflix.com/br/browse/genre/5343'
   @engine = :selenium_chrome
 
   def parse(response, url:, data: {})
     # Scrape start point
     scrape_page
-
+    puts 'scraping'
     # call next page
   end
 
@@ -30,7 +30,7 @@ class NetflixSpiderService < Kimurai::Base
   end
 
   def save_movie(name, image, url)
-    Movie.create!(
+    Movie.find_or_create_by!(
       name:  name,
       image: image,
       url:   url

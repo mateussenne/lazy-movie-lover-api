@@ -5,4 +5,8 @@ class ApiController < ApplicationController
     movies = Movie.all
     render json: movies
   end
+
+  def scrape
+    render json: { hey: 'hi' }
+  end
 end
