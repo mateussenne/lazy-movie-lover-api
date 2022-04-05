@@ -4,7 +4,7 @@ require 'kimurai'
 
 class NetflixSpiderService < Kimurai::Base
   @name = 'neflix_spider_service'
-  @start_urls = 'https://www.netflix.com/br/browse/genre/5343'
+  @start_urls = ['https://www.netflix.com/br/browse/genre/5343']
   @engine = :selenium_chrome
 
   def parse(response, url:, data: {})
