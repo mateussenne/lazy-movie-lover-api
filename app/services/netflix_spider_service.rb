@@ -28,7 +28,8 @@ class NetflixSpiderService < Kimurai::Base
         movie[:url]            = movie_item.css('a')[0]['href']
         movie[:name]           = movie_item.css('span.nm-collections-title-name')&.text&.squish
         movie[:image]          = movie_item.css('img.nm-collections-title-img')[0]['src']
-        movie[:stream_service] = load_stream_service
+        movie[:synopsis]       = 'bla bla bla'
+        movie[:stream_service] = STREAM_SERVICE_CODE
 
         save_movie(movie)
       end
@@ -36,14 +37,6 @@ class NetflixSpiderService < Kimurai::Base
   end
 
   def save_movie(movie)
-    Movie.find_or_create_by!(movie)
-  end
-
-  def generate_movie_slug(name)
-    name.parameterize
-  end
-
-  def load_stream_service
-    StreamService.find_by(code: STREAM_SERVICE_CODE)
+    SaveMovieService.new(movie).perform
   end
 end
