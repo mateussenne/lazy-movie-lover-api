@@ -23,17 +23,20 @@ class NetflixSpiderService < Kimurai::Base
     scrape_response = browser.current_response
     scrape_response.css("//ul[@class='nm-content-horizontal-row-item-container']").each do |movies_row|
       movies_row.css('li.nm-content-horizontal-row-item').each do |movie_item|
-        movie = {}
-
-        movie[:url]            = movie_item.css('a')[0]['href']
-        movie[:name]           = movie_item.css('span.nm-collections-title-name')&.text&.squish
-        movie[:image]          = movie_item.css('img.nm-collections-title-img')[0]['src']
-        movie[:synopsis]       = 'bla bla bla'
-        movie[:stream_service] = STREAM_SERVICE_CODE
-
+        movie = mount_movie(movie_item)
         save_movie(movie)
       end
     end
+  end
+
+  def mount_movie(movie_item)
+    {
+      url:            movie_item.css('a')[0]['href'],
+      name:           movie_item.css('span.nm-collections-title-name')&.text&.squish,
+      poster_image:   movie_item.css('img.nm-collections-title-img')[0]['src'],
+      synopsis:       'bla bla bla',
+      stream_service: STREAM_SERVICE_CODE
+    }
   end
 
   def save_movie(movie)

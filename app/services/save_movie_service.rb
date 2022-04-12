@@ -10,7 +10,7 @@ class SaveMovieService
   def perform
     Movie.find_or_initialize_by(slug: generate_movie_slug(movie[:name])).update!(
       name:           movie[:name],
-      image:          movie[:image],
+      poster_image:   movie[:poster_image],
       synopsis:       movie[:synopsis],
       url:            movie[:url],
       stream_service: load_stream_service(movie[:stream_service])
