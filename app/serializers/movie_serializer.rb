@@ -5,7 +5,10 @@ class MovieSerializer < ActiveModel::Serializer
     :name,
     :synopsis,
     :url,
-    :poster_image
+    :poster_image,
+    :stream_service
 
-  has_one :stream_service
+  def stream_service
+    object.stream_service.name
+  end
 end
