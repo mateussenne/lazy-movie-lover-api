@@ -6,7 +6,7 @@ class NetflixSpiderService < Kimurai::Base
   STREAM_SERVICE_CODE = :netflix
 
   # Variables utilized in Kimurai's parse method
-  @name       = 'neflix_spider_service'
+  @name       = 'neflix_spider'
   @start_urls = ['https://www.netflix.com/br/browse/genre/5343']
   @engine     = :selenium_chrome
 
