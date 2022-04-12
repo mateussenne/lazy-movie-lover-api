@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_014132) do
+ActiveRecord::Schema.define(version: 2022_04_12_011908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "movies", force: :cascade do |t|
     t.string "name"
-    t.string "image"
+    t.string "poster_image"
     t.string "url"
     t.bigint "stream_service_id", null: false
     t.string "synopsis"
