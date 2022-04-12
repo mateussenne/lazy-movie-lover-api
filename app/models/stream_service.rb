@@ -8,6 +8,6 @@ class StreamService < ApplicationRecord
   private
 
   def set_service_code
-    self.code = name.parameterize
+    self.code = name.parameterize.gsub('-', '_')
   end
 end
