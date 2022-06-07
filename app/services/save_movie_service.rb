@@ -13,7 +13,7 @@ class SaveMovieService
       poster_image:   movie[:poster_image],
       synopsis:       movie[:synopsis],
       url:            movie[:url],
-      stream_service: load_stream_service(movie[:stream_service])
+      stream_service: stream_service(movie[:stream_service])
     )
   end
 
@@ -23,7 +23,7 @@ class SaveMovieService
     name.parameterize
   end
 
-  def load_stream_service(code)
+  def stream_service(code)
     StreamService.find_by(code: code)
   end
 end
