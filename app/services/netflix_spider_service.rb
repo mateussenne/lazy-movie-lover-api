@@ -23,7 +23,7 @@ class NetflixSpiderService < Kimurai::Base
     scrape_response = browser.current_response
     scrape_response.css("//ul[@class='nm-content-horizontal-row-item-container']").each do |movies_row|
       movies = mount_movies(movies_row.css('li.nm-content-horizontal-row-item'))
-      save_movies(movies)
+      create_movies(movies)
     end
   end
 
@@ -39,7 +39,7 @@ class NetflixSpiderService < Kimurai::Base
     end
   end
 
-  def save_movies(movies)
-    SaveMovieService.new(movies, STREAM_SERVICE_CODE).perform
+  def create_movies(movies)
+    CreateMovieService.new(movies, STREAM_SERVICE_CODE).perform
   end
 end

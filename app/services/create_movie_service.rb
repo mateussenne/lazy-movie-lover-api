@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SaveMovieService
+class CreateMovieService
   attr_reader :movies, :stream_service_code
 
   def initialize(movies, stream_service_code)
