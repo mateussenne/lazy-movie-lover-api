@@ -35,6 +35,7 @@ gem 'kimurai'
 
 # API
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'sidekiq', '~> 6.5'
 gem 'will_paginate', '~> 3.3'
 
 group :development, :test do
