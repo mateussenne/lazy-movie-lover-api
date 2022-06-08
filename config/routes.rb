@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  require 'sidekiq/web'
+
+  # Configure Sidekiq-specific session middleware
+  Sidekiq::Web.use ActionDispatch::Cookies
+  Sidekiq::Web.use ActionDispatch::Session::CookieStore, key:  '_interslice_session'
+  mount Sidekiq::Web => '/sidekiq'
 
   scope :api do
     root to: 'api#index'
-
-    get 'refresh', to: 'api#scrape'
   end
 end
