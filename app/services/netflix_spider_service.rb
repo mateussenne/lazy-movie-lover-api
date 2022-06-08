@@ -22,24 +22,24 @@ class NetflixSpiderService < Kimurai::Base
   def scrape_page
     scrape_response = browser.current_response
     scrape_response.css("//ul[@class='nm-content-horizontal-row-item-container']").each do |movies_row|
-      movies_row.css('li.nm-content-horizontal-row-item').each do |movie_item|
-        movie = mount_movie(movie_item)
-        save_movie(movie)
-      end
+      movies = mount_movies(movies_row.css('li.nm-content-horizontal-row-item'))
+      save_movies(movies)
     end
   end
 
-  def mount_movie(movie_item)
-    {
-      url:            movie_item.css('a')[0]['href'],
-      name:           movie_item.css('span.nm-collections-title-name')&.text&.squish,
-      poster_image:   movie_item.css('img.nm-collections-title-img')[0]['src'],
-      synopsis:       'bla bla bla',
-      stream_service: STREAM_SERVICE_CODE
-    }
+  def mount_movies(movies)
+    movies.map do |movie|
+      {
+        url:          movie.css('a')[0]['href'],
+        name:         movie.css('span.nm-collections-title-name')&.text&.squish,
+        slug:         movie.css('span.nm-collections-title-name')&.text&.squish&.parameterize,
+        poster_image: movie.css('img.nm-collections-title-img')[0]['src'],
+        synopsis:     'bla bla bla'
+      }
+    end
   end
 
-  def save_movie(movie)
-    SaveMovieService.new(movie).perform
+  def save_movies(movies)
+    SaveMovieService.new(movies, STREAM_SERVICE_CODE).perform
   end
 end

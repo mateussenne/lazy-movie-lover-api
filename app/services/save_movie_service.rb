@@ -1,29 +1,32 @@
 # frozen_string_literal: true
 
 class SaveMovieService
-  attr_reader :movie
+  attr_reader :movies, :stream_service_code
 
-  def initialize(movie)
-    @movie = movie
+  def initialize(movies, stream_service_code)
+    @movies              = movies
+    @stream_service_code = stream_service_code
   end
 
   def perform
-    Movie.find_or_initialize_by(slug: generate_movie_slug(movie[:name])).update!(
-      name:           movie[:name],
-      poster_image:   movie[:poster_image],
-      synopsis:       movie[:synopsis],
-      url:            movie[:url],
-      stream_service: stream_service(movie[:stream_service])
-    )
+    Movie.upsert_all(movies_with_services, unique_by: :slug)
   end
 
   private
 
-  def generate_movie_slug(name)
-    name.parameterize
+  def movies_with_services
+    stream_service_id = stream_service(stream_service_code)
+
+    movies.map do |movie|
+      movie.merge(
+        stream_service_id: stream_service_id,
+        created_at:        DateTime.current,
+        updated_at:        DateTime.current
+      )
+    end
   end
 
   def stream_service(code)
-    StreamService.find_by(code: code)
+    StreamService.find_by(code: code).id
   end
 end
