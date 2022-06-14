@@ -5,6 +5,5 @@ class ScrapeStreamServicesJob
 
   def perform
     NetflixSpiderService.crawl!
-    perform_in(30.seconds.from_now)
   end
 end

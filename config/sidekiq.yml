@@ -1,0 +1,3 @@
+:schedule:
+  ScrapeStreamServicesJob:
+    every: '1m'
