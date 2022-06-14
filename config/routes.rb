@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Configure Sidekiq-specific session middleware
   Sidekiq::Web.use ActionDispatch::Cookies
-  Sidekiq::Web.use ActionDispatch::Session::CookieStore, key:  '_interslice_session'
+  Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session'
   mount Sidekiq::Web => '/sidekiq'
 
   scope :api do
