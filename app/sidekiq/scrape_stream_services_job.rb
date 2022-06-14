@@ -5,12 +5,16 @@ class ScrapeStreamServicesJob
 
   def perform
     NetflixSpiderService.crawl!
-    run_again
+  rescue => e
+    log_errors(e)
   end
 
   private
 
-  def run_again
-    self.class.perform_at(24.hours.from_now)
+  def log_errors(error)
+    ScrapeError.create(
+      error:             error,
+      stream_service_id: 1
+    )
   end
 end
