@@ -2,14 +2,17 @@
 
 class ApiController < ApplicationController
   def index
-
-    movies = Movie.paginate(page: params[:page], per_page: 30)
-    render json: movies
+    if authorized?
+      movies = Movie.paginate(page: params[:page], per_page: 30)
+      render json: movies
+    else
+      render json: { message: 'please contact the administrator' }, status: :unauthorized
+    end
   end
 
   private
 
   def authorized?
-    pa
+    params[:authorization] == Rails.application.credentials.dig(:navigation, :access_key)
   end
 end
