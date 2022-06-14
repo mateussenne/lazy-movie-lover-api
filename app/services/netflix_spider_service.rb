@@ -30,13 +30,17 @@ class NetflixSpiderService < Kimurai::Base
   def mount_movies(movies)
     movies.map do |movie|
       {
-        url:          movie.css('a')[0]['href'],
+        url:          movie_url(movie),
         name:         movie.css('span.nm-collections-title-name')&.text&.squish,
         slug:         movie.css('span.nm-collections-title-name')&.text&.squish&.parameterize,
         poster_image: movie.css('img.nm-collections-title-img')[0]['src'],
         synopsis:     'bla bla bla'
       }
     end
+  end
+
+  def movie_url(movie)
+    movie.css('a')[0].nil? ? 'http://netflix.com' : movie.css('a')[0]['href']
   end
 
   def create_movies(movies)
