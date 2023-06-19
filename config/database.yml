@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: lazy_movie_lover_api_development
+  password: senne123
+  user: senne
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

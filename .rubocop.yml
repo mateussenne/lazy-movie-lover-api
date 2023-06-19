@@ -231,5 +231,5 @@ RSpec/MultipleExpectations:
 RSpec/NamedSubject:
   Enabled: false
 
-Gemspec/DateAssignment:
+Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
