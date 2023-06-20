@@ -7,8 +7,8 @@ class NetflixSpiderService < Kimurai::Base
 
   # Variables utilized in Kimurai's parse method
   @name       = 'neflix_spider'
-  @start_urls = ['https://www.netflix.com/br/browse/genre/5343']
-  @engine     = :selenium_chrome
+  @start_urls = ['https://www.netflix.com/br-en/browse/genre/34399']
+  @engine     = :mechanize
 
   def parse(response, url:, data: {})
     # Scrape start point
