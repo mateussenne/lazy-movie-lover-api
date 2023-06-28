@@ -1,18 +1,27 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
+  before_action :authorized?
+
   def index
-    if authorized?
-      movies = Movie.paginate(page: params[:page], per_page: 30)
-      render json: movies
-    else
-      render json: { message: 'please contact the administrator' }, status: :unauthorized
+    movies = if search_params.present?
+               Movie.search_by_name(search_params).paginate(page: params[:page])
+             else
+               Movie.paginate(page: params[:page])
+             end
+    filter(params).each do |key, value|
+      movies = movies.public_send("filter_by_#{key}", value) if value.present?
     end
+    render json: movies
   end
 
   private
 
-  def authorized?
-    params[:authorization] == Rails.application.credentials.dig(:navigation, :access_key)
+  def filter(params)
+    params.slice(:stream_service)
+  end
+
+  def search_params
+    params[:search]
   end
 end
