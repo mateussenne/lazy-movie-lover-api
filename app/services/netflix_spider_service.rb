@@ -31,7 +31,7 @@ class NetflixSpiderService < Kimurai::Base
         url:          movie_url(movie),
         name:         movie.css('span.nm-collections-title-name')&.text&.squish,
         slug:         movie.css('span.nm-collections-title-name')&.text&.squish&.parameterize,
-        poster_image: movie.css('img.nm-collections-title-img')[0]['src'],
+        poster_image: movie.css('img.nm-collections-title-img')[0]['src']
       }
     end
   end
