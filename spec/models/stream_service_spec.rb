@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe StreamService, type: :model do
+RSpec.describe StreamService do
   pending "add some examples to (or delete) #{__FILE__}"
 end

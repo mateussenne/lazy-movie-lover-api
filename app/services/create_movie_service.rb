@@ -8,7 +8,7 @@ class CreateMovieService
     @stream_service_code = stream_service_code
   end
 
-  def perform
+  def call
     Movie.upsert_all(movies_with_services, unique_by: :slug)
   end
 

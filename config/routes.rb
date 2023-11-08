@@ -8,7 +8,15 @@ Rails.application.routes.draw do
   Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session'
   mount Sidekiq::Web => '/sidekiq'
 
-  scope :api do
-    root to: 'api#index'
+  root to: 'movies#index'
+
+  namespace :api do
+    scope :movies do
+      get '/', to: 'movies#index'
+      post 'favorite/:movie_id', to: 'movies#save_favorite'
+    end
+
+    resources :users
+    post 'login', to: 'users#login'
   end
 end

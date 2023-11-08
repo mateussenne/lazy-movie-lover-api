@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Movie < ApplicationRecord
+  has_many :favorite_movies, dependent: :destroy
+
   belongs_to :stream_service, optional: false
   validates :name, :url, :poster_image, presence: true
   validates :slug, presence: true, uniqueness: true

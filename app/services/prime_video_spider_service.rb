@@ -10,7 +10,7 @@ class PrimeVideoSpiderService < Kimurai::Base
   @start_urls = ['https://www.amazon.com/Prime-Movies/b?ie=UTF8&node=7613704011']
   @engine     = :selenium_chrome
 
-  def parse(response, url:, data: {})
+  def parse(_response, url:, data: {})
     # Scrape start point
     scrape_page
 

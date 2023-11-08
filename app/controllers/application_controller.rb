@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  before_action :authorized?
+
   def authorization?
-    params[:authorization] == Rails.application.credentials.dig(:navigation, :access_key)
+    params[:access_key] == Rails.application.credentials.dig(:navigation, :access_key)
   end
 
   def authorized?

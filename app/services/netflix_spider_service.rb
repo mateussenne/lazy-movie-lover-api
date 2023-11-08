@@ -10,7 +10,7 @@ class NetflixSpiderService < Kimurai::Base
   @start_urls = ['https://www.netflix.com/br-en/browse/genre/34399']
   @engine     = :mechanize
 
-  def parse(response, url:, data: {})
+  def parse(_response, url:, data: {})
     # Scrape start point
     scrape_page
 
@@ -44,6 +44,6 @@ class NetflixSpiderService < Kimurai::Base
   end
 
   def create_movies(movies)
-    CreateMovieService.new(movies, STREAM_SERVICE_CODE).perform
+    CreateMovieService.new(movies, STREAM_SERVICE_CODE).call
   end
 end
