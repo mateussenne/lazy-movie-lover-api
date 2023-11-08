@@ -2,7 +2,7 @@
 
 module Api
   class UsersController < ApplicationController
-    skip_before_action :authorized?, only: [:login]
+    skip_before_action :authorized?, only: %i[login create]
 
     def index
       users = User.all
