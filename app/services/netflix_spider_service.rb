@@ -13,8 +13,6 @@ class NetflixSpiderService < Kimurai::Base
   def parse(_response, url:, data: {})
     # Scrape start point
     scrape_page
-
-    # call next page
   end
 
   private

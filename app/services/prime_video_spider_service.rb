@@ -14,7 +14,6 @@ class PrimeVideoSpiderService < Kimurai::Base
     # Scrape start point
     scrape_page
 
-    # call next page
   end
 
   private
@@ -32,7 +31,6 @@ class PrimeVideoSpiderService < Kimurai::Base
       name:           movie_item.css('a')[0]['aria-label'],
       url:            movie_item.css('a')[0]['href'],
       poster_image:   movie_item.css('img')[0]['src'],
-      synopsis:       'bla bla bla',
       stream_service: STREAM_SERVICE_CODE
     }
   end
