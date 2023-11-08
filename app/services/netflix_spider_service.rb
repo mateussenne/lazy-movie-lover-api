@@ -7,7 +7,7 @@ class NetflixSpiderService < Kimurai::Base
 
   # Variables utilized in Kimurai's parse method
   @name       = 'neflix_spider'
-  @start_urls = ['https://www.netflix.com/br-en/browse/genre/34399']
+  @start_urls = [ENV.fetch('netflix_url')]
   @engine     = :mechanize
 
   def parse(_response, url:, data: {})
