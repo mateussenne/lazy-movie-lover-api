@@ -27,6 +27,11 @@ module Api
       end
     end
 
+    def profile
+      profile_with_movies = User.includes(favorite_movies: :movie).find(current_user.id)
+      render json: { user: profile_with_movies, favorite_movies: profile_with_movies.favorite_movies.map(&:movie) }
+    end
+
     private
 
     def user_params
