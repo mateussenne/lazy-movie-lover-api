@@ -8,9 +8,12 @@ class CreateMovieService
     @stream_service_code = stream_service_code
   end
 
+  # As we are brute force creating moveis, we don't need validations and skip them and use upser_all for performance
+  # rubocop:disable Rails/SkipsModelValidations
   def call
     Movie.upsert_all(movies_with_services, unique_by: :slug)
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   private
 
