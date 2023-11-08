@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class MoviesController < ApiController
+  class MoviesController < ApplicationController
     def index
       movies = if search_params.present?
                  Movie.search_by_name(search_params).paginate(page: params[:page])

@@ -2,7 +2,6 @@
 
 module Api
   class UsersController < ApplicationController
-    SECRET = 'my$ecretK3y'
     def index
       users = User.all
       render json: users
@@ -20,7 +19,7 @@ module Api
     def login
       user = User.find_by(email: params[:email])
       if user&.authenticate(params[:password])
-        render json: { token: JWT.encode(user.id.to_s, SECRET, 'HS256') }
+        render json: { token: encode_token(user.id) }
       else
         render json: 'Incorrect email or password', status: :unauthorized
       end
