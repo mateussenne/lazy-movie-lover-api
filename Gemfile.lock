@@ -70,6 +70,7 @@ GEM
     amazing_print (1.5.0)
     ast (2.4.2)
     backport (1.2.0)
+    bcrypt (3.1.19)
     benchmark (0.2.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -123,6 +124,7 @@ GEM
     jaro_winkler (1.5.6)
     json (2.6.3)
     jsonapi-renderer (0.2.2)
+    jwt (2.7.1)
     kimurai (1.4.0)
       activesupport
       capybara (>= 2.15, < 4.0)
@@ -371,10 +373,12 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   amazing_print
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
   dockerfile-rails (>= 1.4)
   figaro
+  jwt
   kimurai
   listen (~> 3.3)
   pg (~> 1.1)
